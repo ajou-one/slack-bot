@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 const ajouDummy = [
     {
         source: "0",
@@ -21,6 +22,22 @@ const ajouDummy = [
     },
 ]
 
+const url = 'http://localhost:8080';
+async function getAllNotice() {
+    let result = null;
+    try {
+        await fetch(url+'/all', {
+            method: "GET"
+        }).then((r) => {
+            return r.text();
+        }).then((r) => {
+            result = JSON.parse(r);
+        })
+    } catch(err) {
+        console.log(err);
+    }
+    return result;
+}
 
 // 학교 전체
 async function noticeAjouUniv({ message, say }) {

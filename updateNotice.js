@@ -1,7 +1,6 @@
 const { WebClient } = require('@slack/web-api');
 const web = new WebClient(process.env.SLACK_BOT_TOKEN);
 const fetch = require('node-fetch')
-
 const url = 'http://localhost:8080';
 
 const DUMMY = [
