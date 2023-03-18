@@ -2,7 +2,7 @@ require('dotenv/config')
 const schedule = require('node-schedule'); // node schedule
 const { App } = require('@slack/bolt');
 const updateNotice = require("./updateNotice");
-const {noticeAjouUniv, noticeLib, noticeCS, noticeMD, noticeSW, noticeSwCollege, noticeScholar, noticeGG, noticeDom, ajouTeacher} = require("./command/notice");
+const {noticeAjouUniv, noticeLib, noticeCS, noticeMD, noticeSW, noticeSwCollege, noticeScholar, noticeGG, noticeDorm, ajouTeacher} = require("./command/notice");
 const help = require("./command/help");
 
 /**
@@ -29,57 +29,57 @@ const app = new App({
 
 
 // help
-app.message('help', async ({ message, say }) => {
+app.message(new RegExp('^help$'), async ({ message, say }) => {
     await help({message, say});
 });
 
 // ajou
-app.message('ajou', async ({ message, say }) => {
+app.message(new RegExp('^ajou$'), async ({ message, say }) => {
     await noticeAjouUniv({message, say});
 });
 
 // college
-app.message('college', async ({ message, say }) => {
+app.message(new RegExp('^college$'), async ({ message, say }) => {
     await noticeSwCollege({message, say});
 });
 
 // sw
-app.message('sw', async ({ message, say }) => {
+app.message(new RegExp('^sw$'), async ({ message, say }) => {
     await noticeSW({message, say});
 });
 
 // sc
-app.message('cs', async ({ message, say }) => {
+app.message(new RegExp('^cs$'), async ({ message, say }) => {
     await noticeCS({message, say});
 });
 
 // md
-app.message('md', async ({ message, say }) => {
+app.message(new RegExp('^md$'), async ({ message, say }) => {
     await noticeMD({message, say});
 });
 
 // library
-app.message('library', async ({ message, say }) => {
+app.message(new RegExp('^library$'), async ({ message, say }) => {
     await noticeLib({message, say});
 });
 
 // dom
-app.message('dom', async ({ message, say }) => {
-    await noticeDom({message, say});
+app.message(new RegExp('^dorm$'), async ({ message, say }) => {
+    await noticeDorm({message, say});
 });
 
 // teacher
-app.message('teacher', async ({ message, say }) => {
+app.message(new RegExp('^teacher$'), async ({ message, say }) => {
     await ajouTeacher({message, say});
 });
 
 // gg
-app.message('gg', async ({ message, say }) => {
+app.message(new RegExp('^gg$'), async ({ message, say }) => {
     await noticeGG({message, say});
 });
 
 // scholar
-app.message('scholar', async ({ message, say }) => {
+app.message(new RegExp('^scholar$'), async ({ message, say }) => {
     await noticeScholar({message, say});
 });
 
@@ -89,7 +89,7 @@ function slack() {
 
     // 새로 업데이트된 공지가 있으면 업데이트된 공지 리스트 알려줌.
     // 새로 업데이트된 공지가 없으면 없다고 알려줌.
-    schedule.scheduleJob('* * * * * *', () => {
+    schedule.scheduleJob('10 * * * * *', () => {
         console.log('schedule is executed')
         updateNotice();
     })
@@ -98,6 +98,5 @@ function slack() {
 (async () => {
     await app.start(process.env.PORT || 3000);
     console.log('⚡️ Bolt app is running!');
-    updateNotice();
-    // slack();
+    slack();
 })();
