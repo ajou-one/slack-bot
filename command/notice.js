@@ -100,6 +100,19 @@ async function noticeLib({ message, say }) {
     await say(responseMessage);
 }
 
+// 수원시
+async function noticeSuwon({ message, say }) {
+    const response = ajouDummy;
+    let responseMessage = ``;
+    if(response.length) {
+        responseMessage = `🔔 Suwon-city Notifications recent ${response.length} 🔔\n\n`;
+        response.forEach((d, index) => {
+            responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
+        });
+    }
+    await say(responseMessage);
+}
+
 // 경기도
 async function noticeGG({ message, say }) {
     const response = ajouDummy;
@@ -152,4 +165,4 @@ async function ajouTeacher({ message, say }) {
     await say(responseMessage);
 }
 
-module.exports = {noticeAjouUniv, ajouTeacher, noticeDorm, noticeScholar, noticeGG, noticeLib, noticeSW, noticeMD, noticeCS, noticeSwCollege}
+module.exports = {noticeAjouUniv, ajouTeacher, noticeDorm, noticeScholar, noticeSuwon, noticeGG, noticeLib, noticeSW, noticeMD, noticeCS, noticeSwCollege}

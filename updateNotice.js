@@ -3,52 +3,53 @@ const web = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 const DUMMY = [
     {
-        source: "0",
+        classify_code: "0",
         title: "[일자리+센터] 2023년 상반기 현직자 직무특강 안내(렛유인)",
         url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
     },
     {
-        source: "1",
+        classify_code: "1",
         title: "title 2",
         url: "aa",
     },
     {
-        source: "3",
+        classify_code: "3",
         title: "title 3",
         url: "aa",
     },
     {
-        source: "6",
+        classify_code: "6",
         title: "title 4",
         url: "aa",
     },
     {
-        source: "7",
+        classify_code: "7",
         title: "title 5",
         url: "aa",
     },
     {
-        source: "0",
+        classify_code: "0",
         title: "title 6",
         url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
     },
     {
-        source: "0",
+        classify_code: "0",
         title: "title 7",
         url: "https://sso.ajou.ac.kr/sso/processAuthnResponse.do",
     },
 ];
 
 const notice = [
-    '학교 공지사항',
-    '소프트웨어융합대학 공지사항',
-    '소프트웨어학과 공지사항',
-    '사이버보안학과 공지사항',
-    '미디어학과 공지사항',
-    '기숙사 식당',
-    '교직원 식당',
-    '경기도청 공지사항',
-    '한국장학재단 공지사항',
+    '학교 공지사항', // 0
+    '소프트웨어융합대학 공지사항', // 1
+    '소프트웨어학과 공지사항', // 2
+    '사이버보안학과 공지사항', // 3
+    '미디어학과 공지사항', // 4
+    '도서관 공지사항', // 5
+    '생활관 공지사항', // 6
+    '수원시청 공지사항', // 7
+    '경기도청 공지사항', // 8
+    '한국장학재단 공지사항', // 9\
 ];
 
 module.exports = async function updateNotice() {
@@ -66,7 +67,7 @@ module.exports = async function updateNotice() {
 
     // 1. get
     let response = DUMMY.sort((a,b) => {
-        return a.source - b.source;
+        return a.classify_code - b.classify_code;
     });
 
     // 2. check response
@@ -79,9 +80,9 @@ module.exports = async function updateNotice() {
         let addMessage = ``;
 
         response.forEach((d, index) => {
-            // d: {source, title, url}
-            if(index === 0 || prev !== d.source) {
-                prev = d.source;
+            // d: {classify_code, title, url}
+            if(index === 0 || prev !== d.classify_code) {
+                prev = d.classify_code;
                 message = message.concat(addMessage);
                 addMessage = '';
                 addMessage = addMessage.concat(`\n\n⭐️ ${notice[prev]} ⭐️`);

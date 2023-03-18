@@ -11,9 +11,9 @@ module.exports = async function help({ message, say }) {
 - cs: print Cyber Security major notifications\n
 - md: print Media major notifications\n
 - library: print Ajou Library notifications\n
-- dom: print Ajou Dormitary notifications\n
-- food: print Today Ajou restraunt menu\n
+- dorm: print Ajou Dormitary notifications\n
 - scholar: print kosaf notifications\n
+- suwon: print Suwon-city notifications\n
 - gg: print Gyeonggido notifications`;
     await say(helpMessage);
 }

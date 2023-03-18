@@ -2,7 +2,9 @@ require('dotenv/config')
 const schedule = require('node-schedule'); // node schedule
 const { App } = require('@slack/bolt');
 const updateNotice = require("./updateNotice");
-const {noticeAjouUniv, noticeLib, noticeCS, noticeMD, noticeSW, noticeSwCollege, noticeScholar, noticeGG, noticeDorm, ajouTeacher} = require("./command/notice");
+const {noticeAjouUniv, noticeLib, noticeCS, noticeMD, noticeSW, noticeSwCollege, noticeScholar, noticeGG, noticeDorm, ajouTeacher,
+    noticeSuwon
+} = require("./command/notice");
 const help = require("./command/help");
 
 /**
@@ -63,14 +65,20 @@ app.message(new RegExp('^library$'), async ({ message, say }) => {
     await noticeLib({message, say});
 });
 
-// dom
+// dorm
 app.message(new RegExp('^dorm$'), async ({ message, say }) => {
     await noticeDorm({message, say});
 });
 
-// teacher
-app.message(new RegExp('^teacher$'), async ({ message, say }) => {
-    await ajouTeacher({message, say});
+// TODO:: teacher is deprecated
+// // teacher
+// app.message(new RegExp('^teacher$'), async ({ message, say }) => {
+//     await ajouTeacher({message, say});
+// });
+
+// suwon
+app.message(new RegExp('^suwon$'), async ({ message, say }) => {
+    await noticeSuwon({message, say});
 });
 
 // gg
@@ -96,7 +104,7 @@ function slack() {
 }
 
 (async () => {
-    await app.start(process.env.PORT || 3000);
+    await app.start(process.env.PORT || 3100);
     console.log('⚡️ Bolt app is running!');
     slack();
 })();
