@@ -1,5 +1,8 @@
 const { WebClient } = require('@slack/web-api');
 const web = new WebClient(process.env.SLACK_BOT_TOKEN);
+const fetch = require('node-fetch')
+
+const url = 'http://localhost:8080';
 
 const DUMMY = [
     {
@@ -52,6 +55,22 @@ const notice = [
     '한국장학재단 공지사항', // 9\
 ];
 
+async function getNewNotice() {
+    let result = null;
+    try {
+        await fetch(url+'/recent', {
+            method: "GET"
+        }).then((r) => {
+            return r.text();
+        }).then((r) => {
+            result = JSON.parse(r);
+        })
+    } catch(err) {
+        console.log(err);
+    }
+    return result;
+}
+
 module.exports = async function updateNotice() {
     const date = new Date();
     // 🚫
@@ -61,12 +80,13 @@ module.exports = async function updateNotice() {
    🚫 ${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일 ${date.getHours()}:${date.getMinutes()} 🚫\n\n새로 업데이트된 공지가 없습니다.
     `
     // 1. 새로 업데이트 된 공지가 있는지 서버에 요청
+    let response = await getNewNotice();
     // 2. data 받아옴
     // 2-1. 없으면 없다고 알려줌
     // 2-2. 있으면 있는거 리스트 잘 포맷팅해서 보내줌.
 
     // 1. get
-    let response = DUMMY.sort((a,b) => {
+    response = DUMMY.sort((a,b) => {
         return a.classify_code - b.classify_code;
     });
 
@@ -99,7 +119,7 @@ module.exports = async function updateNotice() {
         await web.chat.postMessage (
             {
                 text: message,
-                channel: 'C04U5K4T29M',
+                channel: 'C04UPF4Q4UC',
             },
         )
     } catch (err) {
