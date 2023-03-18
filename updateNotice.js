@@ -55,20 +55,22 @@ const notice = [
 ];
 
 async function getNewNotice() {
-    let result = null;
+    let response = null;
     try {
-        await fetch(url+'/recent', {
-            method: "GET"
-        }).then((r) => {
-            return r.text();
-        }).then((r) => {
-            result = JSON.parse(r);
-        })
+        const request = await fetch(url+'/recent?page=1', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        response = await request.json();
+        console.log(response);
     } catch(err) {
         console.log(err);
     }
-    return result;
+    return response;
 }
+
 
 module.exports = async function updateNotice() {
     const date = new Date();
@@ -85,32 +87,33 @@ module.exports = async function updateNotice() {
     // 2-2. 있으면 있는거 리스트 잘 포맷팅해서 보내줌.
 
     // 1. get
-    response = DUMMY.sort((a,b) => {
-        return a.classify_code - b.classify_code;
-    });
+    // response = DUMMY.sort((a,b) => {
+    //     return a.classify_code - b.classify_code;
+    // });
 
     // 2. check response
     // 빈 배열이면 새로 업데이트 된 공지가 없는 것
-    if(response.length) {
+    if(response.items.length) {
         message = `
         🔔 ${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일 ${date.getHours()}:${date.getMinutes()} 🔔\n\n새로 업데이트된 공지가 있습니다.
         `
         let prev = 0;
         let addMessage = ``;
 
-        response.forEach((d, index) => {
+        response.items.forEach((d, index) => {
             // d: {classify_code, title, url}
             if(index === 0 || prev !== d.classify_code) {
                 prev = d.classify_code;
-                message = message.concat(addMessage);
                 addMessage = '';
                 addMessage = addMessage.concat(`\n\n⭐️ ${notice[prev]} ⭐️`);
             }
-            addMessage = addMessage.concat(`
-            + [ ${d.title} ]
-            + [  ${d.url}  ]\n
+
+            addMessage = addMessage.concat(`\n+ [ ${d.title} ]\n+ [  ${d.url}  ]\n
             `);
+            message = message.concat(addMessage);
         });
+
+        console.log(message);
     }
 
     // 3. send

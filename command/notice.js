@@ -24,26 +24,31 @@ const ajouDummy = [
 
 const url = 'http://localhost:8080';
 async function getAllNotice() {
-    let result = null;
+    let response = null;
     try {
-        await fetch(url+'/all', {
-            method: "GET"
-        }).then((r) => {
-            return r.text();
-        }).then((r) => {
-            result = JSON.parse(r);
-        })
+        const request = await fetch(url+'/all?start=0&end=6&&page=1', {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        response = await request.json();
+        console.log(response)
     } catch(err) {
         console.log(err);
     }
-    return result;
+    return response;
 }
 
 // 학교 전체
 async function noticeAjouUniv({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 0;
+        });
+
         responseMessage = `🔔 Ajou Univ Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -54,9 +59,14 @@ async function noticeAjouUniv({ message, say }) {
 
 // 단과대
 async function noticeSwCollege({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 1;
+        });
+
         responseMessage = `🔔 Software College Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -67,10 +77,15 @@ async function noticeSwCollege({ message, say }) {
 
 // 소웨
 async function noticeSW({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
-        responseMessage = `🔔 Softwre Major Notifications recent ${response.length} 🔔\n\n`;
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 2;
+        });
+
+        responseMessage = `🔔 Software Major Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
         });
@@ -80,9 +95,13 @@ async function noticeSW({ message, say }) {
 
 // 사보
 async function noticeCS({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 3;
+        });
         responseMessage = `🔔 Cyber Security Major Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -93,9 +112,13 @@ async function noticeCS({ message, say }) {
 
 // 미디어
 async function noticeMD({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 4;
+        });
         responseMessage = `🔔 Media Major Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -106,9 +129,14 @@ async function noticeMD({ message, say }) {
 
 // 도서관
 async function noticeLib({ message, say }) {
-    const response = ajouDummy;
+
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 5;
+        });
         responseMessage = `🔔 Ajou Univ Library Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -119,9 +147,13 @@ async function noticeLib({ message, say }) {
 
 // 수원시
 async function noticeSuwon({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 7;
+        });
         responseMessage = `🔔 Suwon-city Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -132,9 +164,14 @@ async function noticeSuwon({ message, say }) {
 
 // 경기도
 async function noticeGG({ message, say }) {
-    const response = ajouDummy;
+
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 8;
+        });
         responseMessage = `🔔 Gyeonggido Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -145,9 +182,13 @@ async function noticeGG({ message, say }) {
 
 // 한국장학재단
 async function noticeScholar({ message, say }) {
-    const response = ajouDummy;
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 9;
+        });
         responseMessage = `🔔 Scholar Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
@@ -158,9 +199,14 @@ async function noticeScholar({ message, say }) {
 
 // 기식
 async function noticeDorm({ message, say }) {
-    const response = ajouDummy;
+
+    let response = await getAllNotice();
     let responseMessage = ``;
-    if(response.length) {
+
+    if(response.items.length) {
+        response = response.items.filter((d) => {
+            return d.classify_code === 6;
+        });
         responseMessage = `🔔 Ajou Univ Dormitory Notifications recent ${response.length} 🔔\n\n`;
         response.forEach((d, index) => {
             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
