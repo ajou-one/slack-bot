@@ -152,4 +152,4 @@ async function ajouTeacher({ message, say }) {
     await say(responseMessage);
 }
 
-module.exports = {noticeAjouUniv, ajouTeacher, noticeDom, noticeScholar, noticeGG, noticeLib, noticeSW, noticeMD, noticeCS, noticeSwCollege}
+module.exports = {noticeAjouUniv, ajouTeacher, noticeDorm, noticeScholar, noticeGG, noticeLib, noticeSW, noticeMD, noticeCS, noticeSwCollege}
