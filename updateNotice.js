@@ -3,44 +3,6 @@ const web = new WebClient(process.env.SLACK_BOT_TOKEN);
 const fetch = require('node-fetch')
 const url = 'http://localhost:8080';
 
-const DUMMY = [
-    {
-        classify_code: "0",
-        title: "[일자리+센터] 2023년 상반기 현직자 직무특강 안내(렛유인)",
-        url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
-    },
-    {
-        classify_code: "1",
-        title: "title 2",
-        url: "aa",
-    },
-    {
-        classify_code: "3",
-        title: "title 3",
-        url: "aa",
-    },
-    {
-        classify_code: "6",
-        title: "title 4",
-        url: "aa",
-    },
-    {
-        classify_code: "7",
-        title: "title 5",
-        url: "aa",
-    },
-    {
-        classify_code: "0",
-        title: "title 6",
-        url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
-    },
-    {
-        classify_code: "0",
-        title: "title 7",
-        url: "https://sso.ajou.ac.kr/sso/processAuthnResponse.do",
-    },
-];
-
 const notice = [
     '학교 공지사항', // 0
     '소프트웨어융합대학 공지사항', // 1

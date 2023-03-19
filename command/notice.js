@@ -1,26 +1,4 @@
 const fetch = require("node-fetch");
-const ajouDummy = [
-    {
-        source: "0",
-        title: "[일자리+센터] 2023년 상반기 현직자 직무특강 안내(렛유인)",
-        url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
-    },
-    {
-        source: "0",
-        title: "(재공지)[SW중심대학] 2023 상반기 현장실습 수기공모전 개최 안내 (~03.26까지)",
-        url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
-    },
-    {
-        source: "0",
-        title: "[일자리+센터] [Apple Retail] 아주대학교 대상 온라인 채용설명회(3/30)",
-        url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
-    },
-    {
-        source: "0",
-        title: "사회봉사센터 뉴스레터 제 1호 \"사랑의 쌀배달 봉사활동이 궁금해?\"",
-        url: "https://www.ajou.ac.kr/kr/ajou/notice.do?mode=view&articleNo=212169&article.offset=0&articleLimit=10",
-    },
-]
 
 const url = 'http://localhost:8080';
 async function getAllNotice() {
@@ -33,7 +11,7 @@ async function getAllNotice() {
             }
         });
         response = await request.json();
-        console.log(response)
+        console.log(response);
     } catch(err) {
         console.log(err);
     }
@@ -199,7 +177,6 @@ async function noticeScholar({ message, say }) {
 
 // 기식
 async function noticeDorm({ message, say }) {
-
     let response = await getAllNotice();
     let responseMessage = ``;
 
@@ -215,17 +192,17 @@ async function noticeDorm({ message, say }) {
     await say(responseMessage);
 }
 
-// 교식
-async function ajouTeacher({ message, say }) {
-    const response = ajouDummy;
-    let responseMessage = ``;
-    if(response.length) {
-        responseMessage = `🔔 Today's Teacher restaurant menu 🔔\n\n`;
-        response.forEach((d, index) => {
-            responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
-        });
-    }
-    await say(responseMessage);
-}
+// // 교식
+// async function ajouTeacher({ message, say }) {
+//     const response = ajouDummy;
+//     let responseMessage = ``;
+//     if(response.length) {
+//         responseMessage = `🔔 Today's Teacher restaurant menu 🔔\n\n`;
+//         response.forEach((d, index) => {
+//             responseMessage = responseMessage.concat(`+ [ ${d.title} ]\n+ [  ${d.url}  ]\n\n\n`);
+//         });
+//     }
+//     await say(responseMessage);
+// }
 
 module.exports = {noticeAjouUniv, ajouTeacher, noticeDorm, noticeScholar, noticeSuwon, noticeGG, noticeLib, noticeSW, noticeMD, noticeCS, noticeSwCollege}
