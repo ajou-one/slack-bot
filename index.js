@@ -97,7 +97,7 @@ function slack() {
 
     // 새로 업데이트된 공지가 있으면 업데이트된 공지 리스트 알려줌.
     // 새로 업데이트된 공지가 없으면 없다고 알려줌.
-    schedule.scheduleJob('* 5 * * * *', () => {
+    schedule.scheduleJob('5 * * * * *', () => {
         console.log('schedule is executed')
         updateNotice();
     })
