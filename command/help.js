@@ -5,15 +5,15 @@ module.exports = async function help({ message, say }) {
     // 다른 command
     const helpMessage = `📌 Command List 📌\n
 - help: print AjouOne Bot command list\n
-- ajou: print Ajou Univ all notifications\n
-- college: print college of Computing and Informatics notifications\n
-- sw: print Software major notifications\n
-- cs: print Cyber Security major notifications\n
-- md: print Media major notifications\n
-- library: print Ajou Library notifications\n
-- dorm: print Ajou Dormitary notifications\n
-- scholar: print kosaf notifications\n
-- suwon: print Suwon-city notifications\n
-- gg: print Gyeonggido notifications`;
+- ajou: print Ajou Univ recent notifications\n`;
+    // - college: print college of Computing and Informatics notifications
+    // - sw: print Software major notifications
+    // - cs: print Cyber Security major notifications
+    // - md: print Media major notifications
+    // - library: print Ajou Library notifications
+    // - dorm: print Ajou Dormitary notifications
+    // - scholar: print kosaf notifications
+    // - suwon: print Suwon-city notifications
+    // - gg: print Gyeonggido notifications
     await say(helpMessage);
 }

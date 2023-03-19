@@ -40,35 +40,35 @@ app.message(new RegExp('^ajou$'), async ({ message, say }) => {
     await noticeAjouUniv({message, say});
 });
 
-// college
-app.message(new RegExp('^college$'), async ({ message, say }) => {
-    await noticeSwCollege({message, say});
-});
-
-// sw
-app.message(new RegExp('^sw$'), async ({ message, say }) => {
-    await noticeSW({message, say});
-});
-
-// sc
-app.message(new RegExp('^cs$'), async ({ message, say }) => {
-    await noticeCS({message, say});
-});
-
-// md
-app.message(new RegExp('^md$'), async ({ message, say }) => {
-    await noticeMD({message, say});
-});
-
-// library
-app.message(new RegExp('^library$'), async ({ message, say }) => {
-    await noticeLib({message, say});
-});
-
-// dorm
-app.message(new RegExp('^dorm$'), async ({ message, say }) => {
-    await noticeDorm({message, say});
-});
+// // college
+// app.message(new RegExp('^college$'), async ({ message, say }) => {
+//     await noticeSwCollege({message, say});
+// });
+//
+// // sw
+// app.message(new RegExp('^sw$'), async ({ message, say }) => {
+//     await noticeSW({message, say});
+// });
+//
+// // sc
+// app.message(new RegExp('^cs$'), async ({ message, say }) => {
+//     await noticeCS({message, say});
+// });
+//
+// // md
+// app.message(new RegExp('^md$'), async ({ message, say }) => {
+//     await noticeMD({message, say});
+// });
+//
+// // library
+// app.message(new RegExp('^library$'), async ({ message, say }) => {
+//     await noticeLib({message, say});
+// });
+//
+// // dorm
+// app.message(new RegExp('^dorm$'), async ({ message, say }) => {
+//     await noticeDorm({message, say});
+// });
 
 // TODO:: teacher is deprecated
 // // teacher
@@ -77,19 +77,19 @@ app.message(new RegExp('^dorm$'), async ({ message, say }) => {
 // });
 
 // suwon
-app.message(new RegExp('^suwon$'), async ({ message, say }) => {
-    await noticeSuwon({message, say});
-});
-
-// gg
-app.message(new RegExp('^gg$'), async ({ message, say }) => {
-    await noticeGG({message, say});
-});
-
-// scholar
-app.message(new RegExp('^scholar$'), async ({ message, say }) => {
-    await noticeScholar({message, say});
-});
+// app.message(new RegExp('^suwon$'), async ({ message, say }) => {
+//     await noticeSuwon({message, say});
+// });
+//
+// // gg
+// app.message(new RegExp('^gg$'), async ({ message, say }) => {
+//     await noticeGG({message, say});
+// });
+//
+// // scholar
+// app.message(new RegExp('^scholar$'), async ({ message, say }) => {
+//     await noticeScholar({message, say});
+// });
 
 function slack() {
     // 매 30뷴 마다 '0 30 * * * *'
